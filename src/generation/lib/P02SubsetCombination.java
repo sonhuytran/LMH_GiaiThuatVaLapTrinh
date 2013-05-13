@@ -24,7 +24,19 @@ public class P02SubsetCombination {
 		return n;
 	}
 
-	public void setNK(int n, int k) {
+	public void setNK(int n, int k) throws IllegalArgumentException {
+		if (n < 0) {
+			throw new IllegalArgumentException("Số n nhập vào là số âm");
+		}
+
+		if (k < 0) {
+			throw new IllegalArgumentException("Số k nhập vào là số âm");
+		}
+
+		if (k > n) {
+			throw new IllegalArgumentException("Số k nhập vào lớn hơn số n");
+		}
+
 		this.n = n;
 		this.k = k;
 		this.generate();
@@ -36,14 +48,16 @@ public class P02SubsetCombination {
 
 	public P02SubsetCombination(int k, int n) {
 		super();
-		this.k = k;
-		this.n = n;
-		this.generations = null;
+		this.setNK(n, k);
 		this.generate();
 	}
 
 	private void generate() {
 		this.generations = new ArrayList<int[]>();
+
+		if (n <= 0 || k <= 0) {
+			return;
+		}
 
 		// Create the first generation
 		int[] generation = new int[this.k];

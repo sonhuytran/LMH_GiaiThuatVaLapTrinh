@@ -18,7 +18,11 @@ public class P03Permutation {
 		return n;
 	}
 
-	public void setN(int n) {
+	public void setN(int n) throws IllegalArgumentException {
+		if (n < 0) {
+			throw new IllegalArgumentException("Số n nhập vào là số âm");
+		}
+
 		this.n = n;
 		this.generate();
 	}
@@ -27,9 +31,9 @@ public class P03Permutation {
 		return generations;
 	}
 
-	public P03Permutation(int n) {
+	public P03Permutation(int n) throws IllegalArgumentException {
 		super();
-		this.n = n;
+		this.setN(n);
 		this.generate();
 	}
 
@@ -41,6 +45,10 @@ public class P03Permutation {
 
 	private void generate() {
 		this.generations = new ArrayList<int[]>();
+
+		if (this.n <= 0) {
+			return;
+		}
 
 		int[] generation = new int[this.n];
 
@@ -54,7 +62,6 @@ public class P03Permutation {
 
 		// Generate the next generations
 		do {
-			generation = generation.clone();
 			i = this.n - 2;
 
 			// Find the first element to change
@@ -63,6 +70,7 @@ public class P03Permutation {
 			}
 
 			if (i >= 0) {
+				generation = generation.clone();
 				int j = this.n - 1;
 
 				// swap it with the first element in the right

@@ -14,7 +14,17 @@ public class P01BinaryString {
 	private int length = 0;
 	private List<String> generatedStrings = null;
 
-	public P01BinaryString(int n) {
+	/**
+	 * Create a new Binary String Generator
+	 * 
+	 * @param n
+	 * @throws IllegalArgumentException
+	 */
+	public P01BinaryString(int n) throws IllegalArgumentException {
+		if (n < 0) {
+			throw new IllegalArgumentException("Số n nhập vào là số âm");
+		}
+
 		this.length = n;
 	}
 
@@ -28,6 +38,11 @@ public class P01BinaryString {
 
 	public List<String> generate() {
 		this.generatedStrings = new ArrayList<String>();
+
+		if (this.length <= 0) {
+			return this.generatedStrings;
+		}
+
 		StringBuilder stringBuilder = new StringBuilder(this.length);
 
 		// the first generation
@@ -58,6 +73,16 @@ public class P01BinaryString {
 					stringBuilder.setCharAt(j, '0');
 				}
 
+				// int count01 = 0;
+
+				// for (int i = 0; i < stringBuilder.length() - 1; i++) {
+				// if (stringBuilder.charAt(i) == '0'
+				// && stringBuilder.charAt(i + 1) == '1') {
+				// count01++;
+				// }
+				// }
+
+				// if (count01 == 2)
 				// add the new generation to the list
 				this.generatedStrings.add(stringBuilder.toString());
 			}
